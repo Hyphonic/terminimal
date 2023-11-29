@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>                                                 
+    <title>🎉 Terminimal</title>
+</head>
+<style type="text/css">
+    @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css');
+    body {
+        background-color: #2e3440;
+    }
+
+    html {
+        outline: 2px solid #81a1c1;
+        border-radius: 5px;
+        margin: 2% auto;
+        width: 95%;
+        height: 90%;
+        text-align: left;
+        padding: 10px;
+        align-items: center;
+        font-family: 'Hack';
+        font-size: medium;
+        line-height: 1.5;
+        color: #eceff4;
+    }
+
+    #user {
+        color: #5e81ac;
+        font-family: 'Hack';
+        font-size: medium;
+    }
+
+    #location {
+        color: #a3be8c;
+        font-family: 'Hack';
+        font-size: medium;
+    }
+
+    #divider {
+        color: #88c0d0;
+        font-family: 'Hack';
+        font-size: medium;
+    }
+
+    #input {
+        color: #eceff4;
+        font-family: 'Hack';
+        font-size: medium;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        width: 50%;
+    }
+
+    #title {
+        color: #eceff4;
+        font-family: 'Hack';
+        font-size: x-large;
+    }
+
+    #active {
+        color: #a3be8c;
+        font-family: 'Hack';
+        font-size: medium;
+    }
+
+    #inactive {
+        color: #bf616a;
+        font-family: 'Hack';
+        font-size: medium;
+    }
+
+    #parent { white-space: nowrap; }
+    #parent.child { display: inline-block; }
+</style>
+<body>
+    <span id="title">🎉 Terminimal</span>
+    <div id="border">
+        <div id="parent" class="main">
+            <span id="user">User</span>
+            <span id="divider">@</span>
+            <span id="location">Terminimal</span>
+            <span id="divider">:$ ~ </span>
+            <input type="text" id="input" autofocus autocomplete="off"></input>
+        </div>
+    </div>
+</body>
+<script>
+
+    const possibleCommands = ["help", "ls", "echo", "exit", "clear", "sudo", "portfolio", "repo", "about"];
+
+    document.getElementById("input").focus();
+    function inputListener() {
+        document.getElementById("input").addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            var newForm = document.createElement('div');
+            newForm.id = "parent";
+            var input = document.getElementById("input");
+            var command = input.value;
+            if (possibleCommands.includes(command)) {
+                newForm.innerHTML = ('<span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="active">' + input.value + '</span>');
+
+            }
+            else {
+                newForm.innerHTML = ('<span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="inactive">' + input.value + '</span>');
+            }
+            document.getElementById("border").insertAdjacentElement('beforebegin', newForm);
+            input.value = '';
+        }})
+    }
+    inputListener();
+    console.log("🎉 Eamster Emgg 🎉");
+
+    //<script type="text/javascript" src="https://livejs.com/live.js"></script>
+
+</script>
+</html>
