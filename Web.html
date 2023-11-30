@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>                                                 
-    <title>🎉 Terminimal</title>
+    <title>Terminimal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 <style type="text/css">
     @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css');
     body {
         background-color: #2e3440;
+        min-height: 100%;
     }
 
     html {
@@ -14,9 +18,9 @@
         border-radius: 5px;
         margin: 2% auto;
         width: 95%;
-        height: 90%;
+        height: 90vh;
         text-align: left;
-        padding: 10px;
+        padding: 15px;
         align-items: center;
         font-family: 'Hack';
         font-size: medium;
@@ -72,9 +76,26 @@
 
     #parent { white-space: nowrap; }
     #parent.child { display: inline-block; }
+
+    .multiline {
+    white-space: pre-wrap;
+    line-height: normal;
+    }
+
 </style>
-<body>
-    <span id="title">🎉 Terminimal</span>
+<body class="rem">
+    <div class="multiline">
+        ███████████                                     ███              ███                            ████ 
+        ░█░░░███░░░█                                    ░░░              ░░░                            ░░███ 
+        ░   ░███  ░   ██████  ████████  █████████████   ████  ████████   ████  █████████████    ██████   ░███ 
+            ░███     ███░░███░░███░░███░░███░░███░░███ ░░███ ░░███░░███ ░░███ ░░███░░███░░███  ░░░░░███  ░███ 
+            ░███    ░███████  ░███ ░░░  ░███ ░███ ░███  ░███  ░███ ░███  ░███  ░███ ░███ ░███   ███████  ░███ 
+            ░███    ░███░░░   ░███      ░███ ░███ ░███  ░███  ░███ ░███  ░███  ░███ ░███ ░███  ███░░███  ░███ 
+            █████   ░░██████  █████     █████░███ █████ █████ ████ █████ █████ █████░███ █████░░████████ █████
+           ░░░░░     ░░░░░░  ░░░░░     ░░░░░ ░░░ ░░░░░ ░░░░░ ░░░░ ░░░░░ ░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░░░ ░░░░░                                                                                                
+    </div>
+    <span id="title">🎉 Welcome to my portfolio! Type <i>help</i> for more information.</span>
+    <span></span>
     <div id="border">
         <div id="parent" class="main">
             <span id="user">User</span>
@@ -86,8 +107,7 @@
     </div>
 </body>
 <script>
-
-    const possibleCommands = ["help", "ls", "echo", "exit", "clear", "sudo", "portfolio", "repo", "about"];
+    const possibleCommands = ["help", "ls", "echo", "exit", "clear", "sudo", "portfolio", "repo", "about", "weather"];
 
     document.getElementById("input").focus();
     function inputListener() {
@@ -96,19 +116,96 @@
             var newForm = document.createElement('div');
             newForm.id = "parent";
             var input = document.getElementById("input");
-            var command = input.value;
+            var command = input.value.split(" ")[0].toLowerCase();
+            var args = input.value.split(" ").slice(1);
             if (possibleCommands.includes(command)) {
-                newForm.innerHTML = ('<span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="active">' + input.value + '</span>');
-
+                newForm.innerHTML = ('<span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="active">' + input.value.toLowerCase() + '</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', newForm);
+                commandHandler(command, args);
             }
             else {
-                newForm.innerHTML = ('<span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="inactive">' + input.value + '</span>');
+                newForm.innerHTML = ('<audio autoplay><source src="https://files.catbox.moe/z0e5of.wav" type="audio/wav"></audio><span id="user">User</span>&nbsp;<span id="divider">@</span>&nbsp;<span id="location">Terminimal</span>&nbsp;<span id="divider">:$ ~ </span><span id="inactive">' + input.value.toLowerCase() + '</span><span style = "color: #81a1c1"> Command not found. Type help for more information.</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', newForm);
             }
-            document.getElementById("border").insertAdjacentElement('beforebegin', newForm);
             input.value = '';
         }})
     }
     inputListener();
+    function commandHandler(command, args) {
+        console.debug(command);
+        switch (command) {
+            case "help":
+                var helpForm = document.createElement('div');
+                helpForm.id = "parent";
+                helpForm.innerHTML = ('<div><span style = "color: #81a1c1"> ╭ Help Page:</span><br><span style = "color: #81a1c1"> ├ help</span><br><span style = "color: #81a1c1"> ├ ls</span><span style = "color: #81a1c1"><br><span style = "color: #81a1c1"> ├ echo</span><br><span style = "color: #81a1c1"> ├ exit</span><br><span style = "color: #81a1c1"> ├ clear</span><br><span style = "color: #81a1c1"> ├ sudo</span><br><span style = "color: #81a1c1"> ├ portfolio</span><br><span style = "color: #81a1c1"> ├ repo</span><br><span style = "color: #81a1c1"> ├ weather<span style = "color: #81a1c1"> ╰ about</span></div>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', helpForm);
+                break;
+            case "ls":
+                var lsForm = document.createElement('div');
+                lsForm.id = "parent";
+                lsForm.innerHTML = ('<div><span style = "color: #81a1c1"> ╴ List:</span><br>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', lsForm);
+                break;
+            case "echo":
+                var echoForm = document.createElement('div');
+                echoForm.id = "parent";
+                echoForm.innerHTML = ('<span style = "color: #81a1c1">' + args.join(" ") + '</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', echoForm);
+                break;
+            case "exit":
+                window.close('', '_parent', '');
+                break;
+            case "clear":
+                //const spanrem = document.querySelectorAll('.rem span');
+                //spanrem.forEach(e => e.remove());
+                var clearForm = document.createElement('div');
+                clearForm.id = "parent";
+                clearForm.innerHTML = ('<span style = "color: #bf616a""> ╴ Doesn\'t work yet! Refresh to manually clear!<   /span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', clearForm);
+                break;
+            case "sudo":
+                var sudoForm = document.createElement('div');
+                sudoForm.id = "parent";
+                sudoForm.innerHTML = ('<span style = "color: #bf616a"> ╴ You\'re already root!</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', sudoForm);
+                break;
+            case "portfolio":
+                var portfolioForm = document.createElement('div');
+                portfolioForm.id = "parent";
+                portfolioForm.innerHTML = ('<span style = "color: #81a1c1">Current Status: <bold>Sleeping</bold> 💤</span><br><span style = "color: #81a1c1">Student at Sainth Josephs Institute 🏫</span><br><span style = "color: #81a1c1">Previously coded with Python 🐍</span><br><span style = "color: #81a1c1">Experienced Minecraft Command Block Creator 👀</span><br><span style = "color: #81a1c1">Autodesk Inventor User ✏️</span><br><span style = "color: #81a1c1">Open for requests 📜</span><br><span style = "color: #81a1c1">Discord: (Hyphonical / Hyphonic#1128) 🖥️</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', portfolioForm);
+                break;
+            case "repo":
+                window.open('https://github.com/Hyphonic/terminimal', '_blank', 'noopener,noreferrer');
+                break;
+            case "about":
+                var aboutForm = document.createElement('div');
+                aboutForm.id = "parent";
+                aboutForm.innerHTML = ('<span style = "color: #81a1c1">What you\'re seeing in front of you is a custom build terminal webpage made in pure hell (and js).<br>I have spent a lot of time making this. (especially on the terminal user behavior but we shouldn\'t talk about that 🏴‍☠️)</span>');
+                document.getElementById("border").insertAdjacentElement('beforebegin', aboutForm);
+                break;
+            case "weather":
+                axios.get('https://ipapi.co/json')
+                .then(response => {
+                    const data = response.data;
+                    let json = JSON.stringify(data);
+                    console.log(data.city);
+                    axios.get('https://wttr.in/' + data.city + '?ATm&format=2')
+                    .then (response => {
+                        const data = response.data;
+                        var weatherForm = document.createElement('div');
+                        weatherForm.id = "parent";
+                        weatherForm.innerHTML = ('<div class = "multiline"; style = "color: #81a1c1">' + data + '</div>');
+                        document.getElementById("border").insertAdjacentElement('beforebegin', weatherForm);
+                    })
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+                break;
+        }
+    }
+
     console.log("🎉 Eamster Emgg 🎉");
 
     //<script type="text/javascript" src="https://livejs.com/live.js"></script>
